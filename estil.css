@@ -1,0 +1,40 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+.headerMenu{
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    padding: 20px;
+    background-color: red;
+}
+
+a.menu:link, a.menu:visited, a.menu:active, a.menu:hover {
+    color: pink;
+}
+
+main{
+    margin-top: 60px;
+    padding: 10px;
+    background-color: blue;
+    height: 100vh;
+}
+
+h1{
+font-size: 24px;
+}
+h2{
+font-size: 22px;
+}
+h3{
+font-size: 20px;
+}
