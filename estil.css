@@ -10,7 +10,7 @@ body {
     background-color: #FFEBD2;
 }
 
-.headerMenu {
+header.menu {
     text-align: center;
     top: 0;
     left: 0;
@@ -27,15 +27,19 @@ a.menu:active {
     text-decoration: none;
     color: #fc8a55;
 }
+
 a.menu:hover {
     color: #e77168;
 }
 
-a:link, a:visited, a:active{
+a:link,
+a:visited,
+a:active {
     text-decoration: underline wavy;
     color: #223c63;
 }
-a:hover{
+
+a:hover {
     color: #4269a5;
 }
 
@@ -46,7 +50,6 @@ main {
 }
 
 .footerFinal {
-    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
@@ -72,12 +75,28 @@ h3 {
     font-size: 20px;
 }
 
+ul {
+    margin-left: 15px;
+}
 
+ol {
+    margin-left: 20px;
+}
+
+
+a.navegador:link, a.navegador:visited, a.navegador:active, li.navegador {
+    color: #4269a5;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+a.navegador:hover, li.navegador:hover{
+    color: #253591;
+}
 
 /*Pagina index*/
-
-
-div.index{
+div.index {
     border-radius: 5px;
     border: 2px solid transparent;
     width: 500px;
@@ -88,11 +107,14 @@ div.index{
     margin-left: auto;
     margin-right: auto;
 }
-div.index:hover{
+
+div.index:hover {
     background-color: #cf8387;
 }
 
-a.index:link, a.index:visited, a.index:active{
+a.index:link,
+a.index:visited,
+a.index:active {
     /*Text*/
     font-size: 20px;
     text-decoration: none;
