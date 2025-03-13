@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <link rel="stylesheet" href="estil.css">
+    <title>Incidencies i Problemes</title>
+    <style>
+        article {
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 4px 8px 10px 0 #8F4E51;
+            animation: down 1s forwards;
+        }
+
+        @keyframes down {
+            from {
+                transform: scale(1.005);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="menu">
+        <nav>
+            <a href="index.html" class="menu">Inici | </a>
+            <a href="manual.html" class="menu">Manual | </a>
+            <a href="dissenyBase.html" class="menu">Disseny Base de Dades | </a>
+            <a href="uml.html" class="menu">Disseny UML | </a>
+            <a href="incedencies.html" class="menu" style="color: #f0c87f;">Incidencies i Problemes</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <header>
+                <h1>Incidencies</h1>
+            </header>
+            <nav>
+                <ol class="navegador">
+                    <li class="navegador">
+                        <a href="#dadesJava" class="navegador">Problemes amb les dades entre Java i SQL</a>
+                    </li>
+                    <li class="navegador">
+                        <a href="#errorConexio" class="navegador">Error al inicialitzar la connexio</a>
+                    </li>
+                    <li class="navegador">
+                        <a href="#errorReserva" class="navegador">Error en la ComboBox entre Reserva I Factura</a>
+                    </li>
+                    <li class="navegador">
+                        <a href="#errorDates" class="navegador">Error en les reserves</a>
+                    </li>
+                </ol>
+            </nav><br>
+            <article>
+                <header id="dadesJava">
+                    <h2>Problemes amb les dades entre Java i SQL</h2>
+                </header>
+                <p>Problema, perquè la data que emmagatzema SQL és diferent de la data que manega Java, especialment,
+                    perquè en el nostre projecte es maneja LocalDateTime. Això és va solucionar afegint un mètode privat
+                    en el model per transformar la Data SQL a LocalDateTime Java.</p>
+                <img src="OBJ/IMG/sqlLDT.png" alt="tranformador"> <br><br>
+                <p>En la qual, cridem la llibreria SQL de Java en el mètode Timestamp i li donem el valor de la data.
+                    Una vegada aquest pas, el convertim a LocalDateTime.<br>També es va realitzar a la inversa</p>
+                <img src="OBJ/IMG/sqlLDT.png" alt="tranformador"> <br><br>
+                <p>On en el return agafem la classe Date i li donem el valor del paràmetre.</p>
+                <p>La solució anterior també es va realitzar per solucionar el problema del calendari però de LocalDate
+                    a LocalDateTime.</p>
+                <img src="OBJ/IMG/LDLDT.png" alt="tranformador">
+            </article><br>
+            <article>
+                <header id="errorConexio">
+                    <h2>Error al inicialitzar la connexio</h2>
+                </header>
+                <code>
+                    Statement ordre = connexion.createStatement();
+                </code>
+                <p>
+                    Perquè considera que l'objecte connexió és nul.
+                </p>
+                <img src="OBJ/IMG/errorNull.png" alt="error null">
+                <p>
+                    Resultava, que en la classe Connexió, l'URL estava mal estructurada perquè accedia per una IP en
+                    comptes de Localhost.
+                </p>
+                <table>
+                    <tr>
+                        <th>
+                            <p>
+                                Incorrecte (amb una IP)
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                Correcta (amb el Localhost)
+                            </p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="OBJ/IMG/errorIP.png" alt="Error IP">
+                        </td>
+                        <td>
+                            <img src="OBJ/IMG/correcteLocal.png" alt="Correcte local">
+                        </td>
+                    </tr>
+                </table>
+            </article><br>
+            <article>
+                <header id="errorReserva">
+                    <h2>Error en la ComboBox entre Reserva I Factura</h2>
+                </header>
+                <p>
+                    Hi ha un error en la combinació de combo box de reserva i factura
+                </p>
+                <img src="OBJ/IMG/factura.png" alt="Factura">
+                <p>
+                    Perquè quan el comprovem
+                </p>
+                <img src="OBJ/IMG/soutfactura.png" ALT="sout">
+                <p>
+                    Retorna
+                </p>
+                <img src="OBJ/IMG/null.png" alt="null">
+                <p>
+                    Es va solucionar afegit un altre valor en l'enumeració
+                </p>
+                <img src="OBJ/IMG/enumeracio.png" alt="enumeracio">
+
+                <p>
+                    I com que la base de dades estan guardats amb espais en comptes de “_”, en java vaig afegir el
+                    següent codi que substitueix els espais en “_”
+                </p>
+                <img src="OBJ/IMG/remplace.png" alt="remplace">
+                <p>
+                    I per arreglar els items del combo box, resulta que els items no s’afegien amb un id
+                </p>
+                <table>
+                    <tr>
+                        <th>
+                            <p>Incorrecte</p>
+                        </th>
+                        <th>
+                            <p>Correcte</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="OBJ/IMG/getReserva.png" alt="Reserva sense id">
+                        </td>
+                        <td>
+                            <img src="OBJ/IMG/getIdReserva.png" alt="get id">
+                        </td>
+                    </tr>
+                </table>
+            </article><br>
+            <article>
+                <header id="errorDates">
+                    <h2>Error en les reserves</h2>
+                </header>
+                <p>
+                    Hi havia un error que mostrava les habitacions independentment de si estaven reservades o no, error
+                    provenia perquè la sentència de cerca era incorrecte, ja que, MySQL només comprovava les primeres
+                    vegades que sortia una habitació. Aquest problema es va resoldre realitzant una altra funció que
+                    incorpora les habitacions que coincideixen aquell dia.
+                </p>
+                <img src="OBJ/IMG/nouFuncio.png" alt="nova funcio">
+            </article>
+        </section>
+    </main>
+
+    <footer class="footerFinal">
+        <p>Hoda Zafzafi El AraJ</p>
+        <p>2024/25</p>
+    </footer>
+</body>
+
+</html>
