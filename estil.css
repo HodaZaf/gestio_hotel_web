@@ -94,30 +94,3 @@ a.navegador:link, a.navegador:visited, a.navegador:active, li.navegador {
 a.navegador:hover, li.navegador:hover{
     color: #253591;
 }
-
-/*Pagina index*/
-div.index {
-    border-radius: 5px;
-    border: 2px solid transparent;
-    width: 500px;
-    background-color: #8F4E51;
-    margin-bottom: 5px;
-    padding: 50px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-div.index:hover {
-    background-color: #cf8387;
-}
-
-a.index:link,
-a.index:visited,
-a.index:active {
-    /*Text*/
-    font-size: 20px;
-    text-decoration: none;
-    color: #fc8a55;
-    font-weight: bold;
-}

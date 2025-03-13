@@ -4,6 +4,58 @@
 <head>
     <link rel="stylesheet" href="estil.css">
     <title>Template</title>
+    <style>
+        div.index {
+            border-radius: 5px;
+            border: 2px solid transparent;
+            width: 500px;
+            background-color: #8F4E51;
+            margin-bottom: 5px;
+            padding: 50px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            animation: down 1s forwards;
+        }
+
+        @keyframes down {
+            from {
+                transform: scale(1.05);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        div.index:hover {
+            animation: up 1s forwards;
+        }
+
+        @keyframes up {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+            }
+        }
+
+        a.index:link,
+        a.index:visited,
+        a.index:active {
+            /*Text*/
+            font-size: 20px;
+            text-decoration: none;
+            color: #fc8a55;
+            font-weight: bold;
+        }
+        main{
+            height: 85.6vh;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -47,4 +99,5 @@
         <p>2024/25</p>
     </footer>
 </body>
+
 </html>
