@@ -4,13 +4,14 @@
     padding: 0;
 }
 
-body {
+body:not(code) {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 16px;
     background-color: #FFEBD2;
 }
 
 header.menu {
+    z-index: 1;
     text-align: center;
     top: 0;
     left: 0;
@@ -38,6 +39,9 @@ a:active {
     text-decoration: underline wavy;
     color: #223c63;
 }
+p{
+    margin-bottom: 5px;
+}
 
 a:hover {
     color: #4269a5;
@@ -46,13 +50,13 @@ a:hover {
 main {
     margin-top: 55px;
     padding: 20px;
-    height: 100vh;
 }
 
 .footerFinal {
     bottom: 0;
     left: 0;
     right: 0;
+    position: relative;
     text-align: center;
     font-weight: bold;
     color: #fc8a55;

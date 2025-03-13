@@ -1,30 +1,196 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <link rel="stylesheet" href="estil.css">
     <title>Disseny base de dades</title>
+    <style>
+        article {
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 4px 8px 10px 0 #8F4E51;
+            animation: down 1s forwards;
+        }
+
+        @keyframes down {
+            from {
+                transform: scale(1.005);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+
 </head>
+
 <body>
     <header class="menu">
         <nav>
-            <a href="index.html" class="menu">Inici  | </a>
+            <a href="index.html" class="menu">Inici | </a>
             <a href="manual.html" class="menu">Manual | </a>
-            <a href="dissenyBase.html" class="menu">Disseny Base de Dades  | </a>
+            <a href="dissenyBase.html" class="menu">Disseny Base de Dades | </a>
             <a href="uml.html" class="menu">Disseny UML | </a>
             <a href="incedencies.html" class="menu">Incidencies i Problemes</a>
         </nav>
     </header>
 
     <main>
-        <h1>Template</h1>
-        <article>
+        <section>
             <header>
-                <h2>Title 1</h2>
+                <h1>Disseny de la Base de dades</h1>
             </header>
-            <p>Text</p>
-            <footer>
-            </footer>
-        </article>
+            <nav>
+            </nav>
+            <article>
+                <header>
+                    <h2>Disseny Conceptual</h2>
+                </header><br>
+                <figure>
+                    <img src="OBJ/IMG/DC.png" alt="Disseny conceptual" height="971" width="806">
+                </figure>
+            </article><br><br>
+            <article>
+                <header>
+                    <h2>Disseny Lògic-Relacional</h2>
+                </header><br>
+                <p>
+                    PERSONA(idPER, nom, cognom, adreca, nif, data_naixament, telefon, email)<br><br>
+                    CLIENT(idCL, data_registre, tipus_client, targeta)<br>
+                    On (idCL) és clau forana que fa referència a la taula PERSONA(idPER)<br><br>
+                    EMPLEAT(idEM, llocFeina, dataContra, salari, estatLaboral)<br>
+                    On (idEM) és clau forana que fa referència a la taula PERSONA(idPER)<br><br>
+                    HABITACIO(idHab, numero, tipus, capacitat, preuNitAD, preuNitMP, estat, descripcio)<br><br>
+                    RESERVA(idRes, dataReserva, dataInici, dataFi, tipus, IVA, preuTotal, idCL, idHab)<br>
+                    On (idCL) és clau forana que fa referència a la taula CLIENT(idCL)<br>
+                    On (idHab) és clau forana que fa referència a la taula HABITACIO(idHab)<br>
+                    TASCA(idTasca, decripcio, dataCreacio, dataExecucio, estat)<br><br>
+                    FACTURA(idFac, dataEmissio, metode, total, iva, basImpo, idRes)<br>
+                    On(idRes) és clau forana que fa referència a la taula RESERVA(idRes)<br><br>
+                    REALITZAR(idTasca, idEM, estat, dataAssignat)<br>
+                    On (idTasca) és clau forana que fa referència a la taula TASCA(idTasca)<br>
+                    On (idEM) és clau forana que fa referència a la taula EMPLEAT(idEM)
+                </p>
+            </article><br><br>
+            <article>
+                <header>
+                    <h2>Disseny Físic</h2>
+                </header><br>
+                <code>
+                    CREATE TABLE PERSONA(<br>
+	                    idPER int PRIMARY KEY not null AUTO_INCREMENT,<br>
+	                    nom varchar(30) not null,<br>
+	                    adreca varchar(100) not null,<br>
+	                    nif varchar(10) not null unique,<br>
+	                    data_naixament date not null,<br>
+	                    telefon VARCHAR(13) not null DEFAULT '+000000000000',<br>
+	                    email varchar(310) not null<br>
+                        cognom VARCHAR(50) NOT NULL<br>
+                    );<br><br>
+                    CREATE TABLE CLIENT(<br>
+	                    idCL int PRIMARY KEY not null,<br>
+	                    FOREIGN KEY (idCL) REFERENCES PERSONA(idPER) ON DELETE CASCADE ON UPDATE CASCADE,<br>
+	                    data_registre date not null,<br>
+	                    tipus_client varchar(100) not null,<br>
+	                    targeta VARCHAR(16) not null DEFAULT '0000000000000000'<br>
+                    );<br><br>
+                    CREATE TABLE EMPLEAT(<br>
+                        idEM int PRIMARY KEY not null,<br>
+                        llocFeina varchar(250) not null,<br>
+                        dataContra date not null,<br>
+                        salari double(5,2) default 0,<br>
+                        estatLaboral varchar(100) default 'Actiu',<br>
+                        FOREIGN KEY (idEM) REFERENCES PERSONA(idPER) ON DELETE CASCADE ON UPDATE CASCADE<br>
+                    );<br><br>
+                    CREATE TABLE HABITACIO(<br>
+                        idHab int primary key not null AUTO_INCREMENT,<br>
+                        numero int not null,<br>
+                        tipus varchar(20) not null,<br>
+                        capacitat int not null,<br>
+                        preuNitAD double(5,2) default 0 NOT NULL,<br>
+                        preuNitMP double(5,2) default 0 NOT NULL,<br>
+                        estat VARCHAR(20) NOT NULL,<br>
+                        descripcio VARCHAR(100) NOT NULL<br>
+                    );<br><br>
+                    CREATE TABLE RESERVA(<br>
+                        idRes int primary key not null AUTO_INCREMENT,<br>
+                        dataReserva date not null,<br>
+                        dataInici date not null,<br>
+                        dataFi date not null CHECK (dataFi > dataInici),<br>
+                        tipus varchar(2) not null,<br>
+                        iva double(5,2) not null default 0,<br>
+                        preuTotal double(5,2) not null,<br>
+                        idCL int not null,<br>
+                        FOREIGN KEY (idCL) REFERENCES CLIENT(idCL) ON DELETE CASCADE ON UPDATE CASCADE,<br>
+                        idHab int not null,<br>
+                        FOREIGN KEY (idHab) REFERENCES HABITACIO(idHab) ON DELETE CASCADE ON UPDATE CASCADE<br>
+                    );<br><br>
+                    CREATE TABLE TASCA(<br>
+                        idTasca int primary key not null AUTO_INCREMENT,<br>
+                        descripcio VARCHAR(100) NOT NULL,<br>
+                        dataCreacio date not null,<br>
+                        dataExecucio date,<br>
+                        estat VARCHAR(20) not null DEFAULT 'Pendent'<br>
+                    );<br><br>
+                    CREATE TABLE FACTURA(<br>
+                        idFac int primary key not null auto_increment,<br>
+                        dataEmissio date not null,<br>
+                        metode varchar(30) not null,<br>
+                        iva double(5,2) not null,<br>
+                        basImpo double(5,2) not null,<br>
+                        total double(5,2) not null,<br>
+                        idRes int not null,<br>
+                        FOREIGN KEY (idRes) REFERENCES RESERVA(idRes) ON DELETE CASCADE ON UPDATE CASCADE<br>
+                    );<br><br>
+                    CREATE TABLE REALITZAR(<br>
+                        idEM INT NOT NULL,<br>
+                        idTasca INT NOT NULL,<br>
+                        estat VARCHAR(50) NOT NULL,<br>
+                        PRIMARY KEY(idEM, idTasca),<br>
+                        FOREIGN KEY (idEM) REFERENCES EMPLEAT(idEM) ON DELETE CASCADE ON UPDATE CASCADE,<br>
+                        FOREIGN KEY (idTasca) REFERENCES TASCA(idTasca) ON DELETE CASCADE ON UPDATE CASCADE<br>
+                        dataAssignar date NOT NULL;<br>
+                    );<br><br>
+                    INSERT INTO PERSONA (nom, cognom, adreca, nif, data_naixament, telefon, email) VALUES<br>
+                    ("Jose", "Fernandez", "c/carretera 1", "00000000X", "1900-01-01", 000000000, "exemple@exemple.com"),<br>
+                    ("Maria", "Gomes", "c/carretera 2", "00000001X", "1900-01-01", 000000000, "exemple@exemple.com"),<br>
+                    ("Laura", "Hernandez", "c/carretera 3", "00000002X", "1900-01-01", 000000000, "exemple@exemple.com"),<br>
+                    ("Ahmed", "Almouri", "c/carretera 4", "00000003X", "1900-01-01", 000000000, "exemple@exemple.com"),<br>
+                    ("Manal", "Dahmeed", "c/carretera 5", "00000004X", "1900-01-01", 000000000, "exemple@exemple.com"),<br>
+                    ("Kai", "Yamada", "c/carretera 6", "00000005X", "1900-01-01", 000000000, "exemple@exemple.com");<br><br>
+                    INSERT INTO CLIENT VALUES<br>
+                    (1,"1900-01-01","Regular",0),<br>
+                    (4,"1900-01-01","Vip",0),<br>
+                    (6,"1900-01-01","Regular",0);<br><br>
+                    INSERT INTO EMPLEAT VALUES<br>
+                    (2, "Habitacions", "1900-01-01",	0.00,	"Actiu"),<br>
+                    (3, "Passadis", "1900-01-01", 0.00, "Baixa"),<br>
+                    (5, "Cuina", "1900-01-01", 0.00, "Permis");<br><br>
+                    INSERT INTO HABITACIO (numero, tipus, capacitat, preuNitAD, preuNitMP, estat, descripcio) VALUES<br>
+                    (100,"Individual",1,150,100,"Disponible","Descripcio1"),<br>
+                    (101,"Doble",2,150,200,"Ocupada","Descripcio2"),<br>
+                    (102,"Suite",2,100,150,"Neteja","Descripcio3");<br><br>
+                    INSERT INTO RESERVA (dataReserva,dataInici,dataFi,tipus,IVA,preuTotal,idCL,idHab) VALUES<br>
+                    ("1900-01-01","1900-01-01","1900-01-02","AD",7,53.5,1,3),<br>
+                    ("1900-01-01","1900-01-01","1900-01-02","MP",21,242,6,2),<br>
+                    ("1900-01-01","1900-01-01","1900-01-02","MP",21,181.5,4,1);<br><br>
+                    INSERT INTO TASCA(descripcio,dataCreacio,dataExecucio) VALUES<br>
+                    ("Descripcio","1900-01-01","1900-01-01"),<br>
+                    ("Descripcio","1900-01-01","1900-01-01"),<br>
+                    ("Descripcio","1900-01-01","1900-01-01");<br><br>
+                    INSERT INTO FACTURA(dataEmissio,metode,IVA,basImpo,total,idRes) VALUES<br>
+                    ("1900-01-01","Targeta",31.5,150,53.5,3),<br>
+                    ("1900-01-01","Google Pay",42,200,242,2),<br>
+                    ("1900-01-01","Apple Pay",3.5,50,181.5,1);<br><br>
+                    INSERT INTO REALITZAR VALUES<br>
+                    (2,1,"Completa","1900-01-01"),<br>
+                    (5,1,"Pendent","1900-01-01"),<br>
+                    (3,3,"Pendent","1900-01-01"),<br>
+                    (2,2,"Cancellada","1900-01-01");
+                </code>
+            </article>
+        </section>
     </main>
 
     <footer class="footerFinal">
@@ -32,4 +198,5 @@
         <p>2024/25</p>
     </footer>
 </body>
+
 </html>
