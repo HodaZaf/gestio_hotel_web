@@ -3,7 +3,24 @@
 
 <head>
     <link rel="stylesheet" href="estil.css">
-    <title>Template</title>
+    <title>Manual</title>
+
+    <style>
+        a.navBig:link,
+        a.navBig:visited,
+        a.navBig:active,
+        li.navBig {
+            color: #4269a5;
+            font-weight: bold;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        a.navBig:hover,
+        li.navBig:hover {
+            color: #253591;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,11 +40,11 @@
         </header>
         <nav>
             <ol>
-                <li class="navegador"><a href="#seccioClient" class="navegador">Seccio de clients</a></li>
+                <li class="navBig"><a href="#seccioClient" class="navBig">Seccio de clients</a></li>
+                <li class="navBig"><a href="#seccioEmpleats" class="navBig">Seccio d'empleats</a></li>
             </ol>
         </nav>
         <br>
-
         <section id="seccioClient">
             <header>
                 <h2>Seccio de Clients</h2>
@@ -48,7 +65,7 @@
                 <header>
                     <h3 id="crearClinet">Crear un client</h3>
                 </header>
-                <p>Quan inicies l’aplicació et permet accedir com t="a client o com a empleat. En aquest cas, accedirem
+                <p>Quan inicies l’aplicació et permet accedir com a client o com a empleat. En aquest cas, accedirem
                     com a client.</p>
                 <img src="OBJ/IMG/placeholder.png" alt="Placeholder" width="25%"><br><br>
                 <p>
@@ -171,6 +188,16 @@
                 </p>
                 <img src="OBJ/IMG/placeholder.png" alt="Placeholder" width="25%">
             </article>
+        </section><br>
+        <section>
+            <header id="seccioEmpleats">
+                <h2>
+                    Secció d'empleats
+                </h2>
+            </header>
+            <nav>
+
+            </nav>
         </section>
 
     </main>
