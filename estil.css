@@ -98,3 +98,20 @@ a.navegador:link, a.navegador:visited, a.navegador:active, li.navegador {
 a.navegador:hover, li.navegador:hover{
     color: #253591;
 }
+
+article {
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 4px 8px 10px 0 #8F4E51;
+    animation: down 1s forwards;
+}
+
+@keyframes down {
+    from {
+        transform: scale(1.005);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
