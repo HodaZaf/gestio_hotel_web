@@ -99,7 +99,7 @@ a.navegador:hover, li.navegador:hover{
     color: #253591;
 }
 
-article {
+article:not(#indexArt) {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 4px 8px 10px 0 #8F4E51;
