@@ -93,6 +93,7 @@ a.navegador:link, a.navegador:visited, a.navegador:active, li.navegador {
     font-weight: bold;
     font-size: 16px;
     text-decoration: none;
+    margin-left: 15px;
 }
 
 a.navegador:hover, li.navegador:hover{
